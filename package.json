@@ -1,0 +1,19 @@
+{
+  "name": "course-manager",
+  "version": "1.0.0",
+  "description": "A web app to help manage and organize your coursework",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carsonclarke570/course-manager.git"
+  },
+  "author": "Carson Clarke-Magrab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carsonclarke570/course-manager/issues"
+  },
+  "homepage": "https://github.com/carsonclarke570/course-manager#readme"
+}
