@@ -13,7 +13,7 @@ var CourseSchema = new Schema({
 	name: String,
 	code: String,
 	credits: Number,
-	taken: Boolean
+	taken: String
 });
 
 module.exports = mongoose.model('Course', CourseSchema);

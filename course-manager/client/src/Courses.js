@@ -62,6 +62,8 @@ class CourseList extends React.Component {
 						<tr>
 							<th scope="col">Course Code</th>
 							<th scope="col">Course Name</th>
+							<th scope="col">Credits</th>
+							<th scope="col">Taken</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -70,6 +72,8 @@ class CourseList extends React.Component {
 								<tr>
 									<th scope="row">{ s.code }</th>
 									<td>{ s.name }</td>
+									<td>{ s.credits }</td>
+									<td>{ s.taken }</td>
 								</tr>
 							);
 						})}
@@ -85,7 +89,9 @@ class ModalAddButton extends React.Component {
 		super();
 		this.state = {
 			name: '',
-			code: ''
+			code: '',
+			credits: '',
+			taken: 'Yes'
 		};
 	}
 	
@@ -98,13 +104,13 @@ class ModalAddButton extends React.Component {
 	onSubmit = (e) => {
 		e.preventDefault();
 		
-		const { name, code } = this.state;
-		axios.post('/api/courses', { name, code });
+		const { name, code, credits, taken } = this.state;
+		axios.post('/api/courses', { name, code, credits, taken });
 		window.location.reload();
 	}
 	
 	render() {
-		const { name, code } = this.state;
+		const { name, code, credits, taken } = this.state;
 		return (
 			<div class="ml-3">
 				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">
@@ -124,11 +130,22 @@ class ModalAddButton extends React.Component {
 								<div class="modal-body">
 									<div class="form-group">
 										<label for="name">Course Name</label>
-										<input name="name" value={name} onChange={this.onChange} type="text" class="form-control" id="name" placeholder="University Physics II"></input>
+										<input name="name" value={name} onChange={this.onChange} type="text" class="form-control" id="name" placeholder="University Physics II" required></input>
 									</div>
 									<div class="form-group">
 										<label for="code">Course Code</label>
-										<input name="code" value={code} onChange={this.onChange} type="text" class="form-control" id="code" placeholder="PHYS 212"></input>
+										<input name="code" value={code} onChange={this.onChange} type="text" class="form-control" id="code" placeholder="PHYS 212" required></input>
+									</div>
+									<div class="form-group">
+										<label for="credits">Credits</label>
+										<input name="credits" value={credits} onChange={this.onChange} type="text" class="form-control" id="credits" placeholder="4" required></input>
+									</div>
+									<div class="form-group">
+										<label for="taken">Taken</label>
+										<select mutiple class="form-control" name="taken" value={taken} onChange={this.onChange} id="taken" required>
+											<option>Yes</option>
+											<option>No</option>
+										</select>
 									</div>
 								</div>
 								<div class="modal-footer">
