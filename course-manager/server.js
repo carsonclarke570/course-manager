@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var port = process.env.PORT || 8080;       
 
 var Course = require('./app/models/course');
+var CreditReq = require('./app/models/credit_req');
 
 // Routes
 var router = express.Router();              
@@ -27,10 +28,6 @@ var router = express.Router();
 router.use(function(req, res, next) {
 	console.log('Something is happening');
 	next();
-});
-
-router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
 });
 
 router.route('/courses')
@@ -77,6 +74,69 @@ router.route('/courses/:course_id')
 					res.send(err);
 				res.json({ message: 'Course updated!' });
 			});
+		});
+	})
+	.delete(function(req, res) {
+		Course.remove({
+			_id: req.params.course_id
+		}, function(err, course) {
+			if (err)
+				res.send(err);
+			res.json({ message: 'Sucessfully deleted' });
+		});
+	});
+	
+router.route('/creditreqs')
+	.post(function(req, res) {
+		var credreq = new CreditReq();
+		credreq.name = req.body.name;
+		credreq.creditreq = req.body.creditreq;
+		credreq.credittaken = req.body.credittaken;
+		credreq.save(function(err) {
+			if (err)
+				res.send(err);
+			
+			res.json({ message: 'Course created:' + credreq.name});
+		});
+	})
+	.get(function(req, res) {
+		CreditReq.find(function(err, credreq) {
+			if (err)
+				res.send(err);
+			
+			res.json(credreq);
+		});
+	});
+	
+router.route('/creditreqs/:credreq_id')
+	.get(function(req, res) {
+		CreditReq.findById(req.params.credreq_id, function(err, credreq) {
+			if (err)
+				res.send(err);
+			res.json(credreq);
+		});
+	})
+	.put(function(req, res) {
+		CreditReq.findById(req.params.credreq_id, function(err, credreq) {
+			if (err)
+				res.send(err);
+			credreq.name = req.body.name;
+			credreq.creditreq = req.body.creditreq;
+			credreq.credittaken = req.body.credittaken;
+			credreq.save(function(err) {
+				if (err)
+					res.send(err);
+				res.json({ message: 'Course updated!' });
+			});
+		});
+	})
+	.delete(function(req, res) {
+		CreditReq.remove({
+			_id: req.params.credreq_id
+		}, function(err, credreq) {
+			if (err)
+				res.send(err);
+			res.json({ message: 'Sucessfully deleted' });
 		});
 	});
 

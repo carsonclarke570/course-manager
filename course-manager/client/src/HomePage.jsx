@@ -3,26 +3,51 @@ import React from 'react';
 class HomePage extends React.Component {
 	render() {
 		return (
-			<NavBar/>
+			<div>
+				<NavBar/>
+				<div class="container-fluid">
+					<div class="row">
+						<SideBar/>
+						<div></div>
+					</div>
+				</div>
+			</div>
 		);
 	}
 }
 
 class NavBar extends React.Component {
+	
 	render() {
 		return (
-			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-				<a class="navbar-brand" href="/">Course Manager</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarNav">
-					<ul class="navbar-nav">
-						<li class="nav-item active">
-							<a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+			<nav class="navbar fixed-top navbar-dark bg-dark flex-md-nowrap p-0 shadow">
+				<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Course Manager</a>
+				<ul class="navbar-nav px-3">
+					<li class="nav-item text-nowrap">
+						<a class="nav-link" href="#">Sign out</a>
+					</li>
+				</ul>
+			</nav>
+		);
+	}
+}
+
+class SideBar extends React.Component {
+	
+	render() {
+		return (
+			<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+				<div class="sidebar-sticky">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link active" href="/">
+								Dashboard
+							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/courses">Courses</a>
+							<a class="nav-link" href="/courses">
+								Courses
+							</a>
 						</li>
 					</ul>
 				</div>
