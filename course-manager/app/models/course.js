@@ -1,11 +1,3 @@
-/**
- * Course model
- *
- * @file 	course.js
- * @author	Carson Clarke-Magrab
- * @since	1.0.0
- */
- 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

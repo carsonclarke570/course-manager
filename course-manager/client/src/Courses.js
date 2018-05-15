@@ -42,12 +42,44 @@ class SideBar extends React.Component {
 					<ul class="nav flex-column">
 						<li class="nav-item">
 							<a class="nav-link" href="/">
+								<span class="oi oi-browser mr-2" title="dashboard" aria-hidden="true"></span>
 								Dashboard
 							</a>
 						</li>
+					</ul>
+					<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+						<span>Task Manager</span>
+						<a class="d-flex align-items-center text-muted" href="#"></a>
+					</h6>
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link" href="/tasks">
+								<span class="oi oi-list mr-2" title="list" aria-hidden="true"></span>
+								Tasks
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/courses">
+								<span class="oi oi-pencil mr-2" title="pencil" aria-hidden="true"></span>
+								Projects
+							</a>
+						</li>
+					</ul>
+					<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+						<span>Course Manager</span>
+						<a class="d-flex align-items-center text-muted" href="#"></a>
+					</h6>
+					<ul class="nav flex-column">
 						<li class="nav-item">
 							<a class="nav-link active" href="/courses">
+								<span class="oi oi-spreadsheet mr-2" title="spreadsheet" aria-hidden="true"></span>
 								Courses
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/courses">
+								<span class="oi oi-clock mr-2" title="clock" aria-hidden="true"></span>
+								Semesters
 							</a>
 						</li>
 					</ul>
@@ -108,7 +140,7 @@ class CredReqList extends React.Component {
 								<th scope="col">Credit Requirement</th>
 								<th scope="col">Credits Required</th>
 								<th scope="col">Credits Taken</th>
-								<th scope="col">Delete</th>
+								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -118,7 +150,7 @@ class CredReqList extends React.Component {
 										<th scope="row">{ s.name }</th>
 										<td>{ s.creditreq }</td>
 										<td>{ s.credittaken }</td>
-										<td><button type="button" class="btn btn-danger" onClick={deleteReq.bind(this, s._id)}>Delete</button></td>
+										<td><button type="button" class="btn btn-outline-danger btn-sm" onClick={deleteReq.bind(this, s._id)}>Delete</button></td>
 									</tr>
 								);
 							})}
@@ -129,7 +161,6 @@ class CredReqList extends React.Component {
 		} else {
 			return ( 
 				<div>
-					<h1 class="text-center font-weight-bold">Credit Requirements</h1>
 					<h5 class="text-center">Empty! Add a new category.</h5>
 				</div>
 			);
@@ -168,7 +199,7 @@ class CourseList extends React.Component {
 								<th scope="col">Course Name</th>
 								<th scope="col">Credits</th>
 								<th scope="col">Taken</th>
-								<th scope="col">Delete</th>
+								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -179,7 +210,7 @@ class CourseList extends React.Component {
 										<td>{ s.name }</td>
 										<td>{ s.credits }</td>
 										<td>{ s.taken }</td>
-										<td><button type="button" class="btn btn-danger" onClick={deleteCourse.bind(this, s._id)}>Delete</button></td>
+										<td><button type="button" class="btn btn-outline-danger btn-sm" onClick={deleteCourse.bind(this, s._id)}>Delete</button></td>
 									</tr>
 								);
 							})}
@@ -190,7 +221,6 @@ class CourseList extends React.Component {
 		} else {
 			return ( 
 				<div>
-					<h1 class="text-center font-weight-bold">Courses</h1>
 					<h5 class="text-center">Empty! Add a new course.</h5>
 				</div>
 			);
@@ -227,7 +257,7 @@ class AddCreditReqButton extends React.Component {
 		
 		return (
 			<div class="ml-3">
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">
+				<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
 					Add Credit Requirement
 				</button>
 
@@ -248,8 +278,8 @@ class AddCreditReqButton extends React.Component {
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-primary">Add Requirement</button>
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-outline-primary">Add Requirement</button>
+									<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
 								</div>
 							</form>
 						</div>
@@ -290,7 +320,7 @@ class AddCourseButton extends React.Component {
 		
 		return (
 			<div class="ml-3">
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#addCourse">
+				<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#addCourse">
 					Add Course
 				</button>
 
@@ -326,8 +356,8 @@ class AddCourseButton extends React.Component {
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-primary">Add Course</button>
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-outline-primary">Add Course</button>
+									<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
 								</div>
 							</form>
 						</div>

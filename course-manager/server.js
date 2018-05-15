@@ -21,6 +21,7 @@ var port = process.env.PORT || 8080;
 
 var Course = require('./app/models/course');
 var CreditReq = require('./app/models/credit_req');
+var Task = require('./app/models/task');
 
 // Routes
 var router = express.Router();              
@@ -139,10 +140,66 @@ router.route('/creditreqs/:credreq_id')
 			res.json({ message: 'Sucessfully deleted' });
 		});
 	});
+	
+router.route('tasks/:task_id')
+	.get(function(req, res) {
+		Task.findById(req.params.task_id, function(err, task) {
+			if(err)
+				res.send(err);
+			res.json(task);
+		});
+	})
+	.put(function(req, res) {
+		Task.findById(req.params.task_id, function(err, task) {
+			if(err)
+				res.send(err);
+			task.title = req.body.title;
+			task.description = req.body.description;
+			task.due = new Date(req.body.due);
+			task.priority = req.body.priority;
+			task.save(function(err) {
+				if (err)
+					res.send(err);
+				res.json({ message: 'Task updated' });
+			});
+		});
+	})
+	.delete(function(req, res) {
+		Task.remove({
+			_id: req.params.task_id
+		}, function(err, task) {
+			if(err)
+				res.send(err);
+			res.json({ message: 'Sucessfully deleted' });
+		});
+	});
+	
+router.route('/tasks')
+	.post(function(req, res) {
+		var task = new Task();
+		task.title = req.body.title;
+		task.description = req.body.description;
+		task.due = new Date(req.body.due);
+		task.priority = req.body.priority;
+		task.save(function(err) {
+			if (err)
+				res.send(err);
+			
+			res.json({ message: 'Task created' });
+		});
+	})
+	.get(function(req, res) {
+		Task.find(function(err, task) {
+			if (err)
+				res.send(err);
+			
+			res.json(task);
+		});
+	});
 
 // Register Routes
 app.use('/api', router);
 
 // Start Server
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('Server started on port ' + port);
